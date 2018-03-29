@@ -1,0 +1,2 @@
+# webpack-static-boilerplate
+webpack
