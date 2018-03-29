@@ -1,15 +1,28 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const htmlPlugin = new HtmlWebPackPlugin({
+const HtmlPlugin = new HtmlWebpackPlugin({
     template: './src/index.html',
-    filename: './index.html'
+    favicon: path.resolve(__dirname, './src/resources/icons/favicon.ico'),
+    inject: false
 })
 
 module.exports = {
+    entry: [
+        './src/index.js'
+    ],
+    output: {
+        path: path.join(__dirname, 'public'),
+        filename: 'js/bundle.js'
+    },
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
+    devtool: 'source-map',
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader"
@@ -17,5 +30,5 @@ module.exports = {
             }
         ]
     },
-    plugins: [htmlPlugin]
+    plugins: [HtmlPlugin]
 };
