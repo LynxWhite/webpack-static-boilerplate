@@ -1,25 +1,16 @@
 const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
-const HtmlPlugin = new HtmlWebpackPlugin({
-    template: './src/index.html',
-    favicon: path.resolve(__dirname, './src/resources/icons/favicon.ico'),
-    inject: false
-})
 
 module.exports = {
     entry: [
         './src/index.js'
     ],
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'js/bundle.js'
-    },
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.styl'],
         alias: {}
     },
-    devtool: 'source-map',
+    
     module: {
         rules: [
             {
@@ -54,10 +45,18 @@ module.exports = {
             }
         ]
     },
-    plugins: [HtmlPlugin],
-    devServer: {
-        host: 'localhost',
-        port: 8080,
-        historyApiFallback: true, // respond to 404s with index.html
-    }
-};
+    
+    plugins: [
+        new CleanWebpackPlugin(['public']),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            favicon: path.resolve(__dirname, './src/resources/icons/favicon.ico'),
+            inject: false,
+            title: 'Production'
+        })
+    ],
+    output: {
+        path: path.join(__dirname, 'public'),
+        filename: 'js/bundle.js'
+    },
+}
