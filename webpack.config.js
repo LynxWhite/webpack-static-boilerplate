@@ -30,5 +30,10 @@ module.exports = {
             }
         ]
     },
-    plugins: [HtmlPlugin]
+    plugins: [HtmlPlugin],
+    devServer: {
+        host: 'localhost',
+        port: 8080,
+        historyApiFallback: true, // respond to 404s with index.html
+    }
 };

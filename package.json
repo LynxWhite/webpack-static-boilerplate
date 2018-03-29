@@ -4,7 +4,7 @@
   "description": "webpack boilerplate for static projects",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development --open  --content-base",
     "dev": "webpack --mode development",
     "build": "webpack --mode production"
   },
