@@ -16,7 +16,8 @@ module.exports = {
         filename: 'js/bundle.js'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.json', '.styl'],
+        alias: {}
     },
     devtool: 'source-map',
     module: {
@@ -27,6 +28,29 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: /\.(png|jpg|svg|ico|cur|ani)$/,
+                use: ['file-loader?name=images/[name].[ext]']
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                loader: 'file-loader?name=fonts/[name].[ext]'
+            },
+            {
+                test: /\.styl$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'stylus-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             }
         ]
     },
